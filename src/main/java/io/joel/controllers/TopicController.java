@@ -53,13 +53,13 @@ public class TopicController {
         return "redirect:/";
     }
 
-    @RequestMapping("/{topicId}")
+    @RequestMapping("/topic/{topicId}")
     public String topicDetail(@PathVariable("topicId") long id, Model model) {
         model.addAttribute("topic", topicRepo.findOne(id));
         return "topicDetail";
     }
 
-    @RequestMapping(value = "/{topicId}/comment", method = RequestMethod.POST)
+    @RequestMapping(value = "/topic/{topicId}/comment", method = RequestMethod.POST)
     public String createComment() {
         return "redirect:/";
     }

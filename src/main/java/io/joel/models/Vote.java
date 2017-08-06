@@ -6,8 +6,13 @@ import javax.persistence.*;
 @Table(name="vote")
 public class Vote {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private VoteStyle style;
+
+    @ManyToOne
+    @JoinColumn(name = "topic_id")
     private Topic topic;
 
     public Vote() { }
@@ -18,8 +23,6 @@ public class Vote {
         this.topic = topic;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -36,8 +39,6 @@ public class Vote {
         this.style = style;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "topic_id")
     public Topic getTopic() {
         return topic;
     }
