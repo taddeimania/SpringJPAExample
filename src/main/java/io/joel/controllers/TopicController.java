@@ -3,8 +3,10 @@ package io.joel.controllers;
 import io.joel.interfaces.TopicRepository;
 import io.joel.interfaces.VoteRepository;
 import io.joel.models.Topic;
+import io.joel.models.User;
 import io.joel.models.Vote;
 import io.joel.models.VoteStyle;
+import io.joel.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -24,10 +27,16 @@ public class TopicController {
     @Autowired
     VoteRepository voteRepo;
 
+    @Autowired
+    UserRepository userRepo;
+
     @RequestMapping("/")
-    public String index(Model model) {
-        List<Topic> topics = topicRepo.findAll();
+    public String index(Model model, Principal principal) {
+        User user = userRepo.findByUsername(principal.getName());
+
+        List<Topic> topics = topicRepo.findAllByUser(user);
         model.addAttribute("topics", topics);
+        model.addAttribute("principal", principal);
         return "index";
     }
 

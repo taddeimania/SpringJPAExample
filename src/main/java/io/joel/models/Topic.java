@@ -13,6 +13,10 @@ public class Topic {
 
     private List<Vote> votes;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Topic() {
     }
 
@@ -69,4 +73,11 @@ public class Topic {
         return total;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

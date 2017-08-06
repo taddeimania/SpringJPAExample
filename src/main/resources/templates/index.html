@@ -11,7 +11,7 @@
             <input type="submit" value="Logout" />
         </form>
         <div class="col-md-12">
-            <h1 th:text="'Hello ' + ${user}"></h1>
+            <h1 th:text="'Hello ' + ${principal.name}"></h1>
             <form th:action="@{/createTopic}" method="post">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
