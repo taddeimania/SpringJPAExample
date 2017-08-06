@@ -42,9 +42,11 @@ public class TopicController {
 
     @RequestMapping(value = "/createTopic", method = RequestMethod.POST)
     public String createTopic(@RequestParam("title") String title,
-                              @RequestParam("description") String desc) {
+                              @RequestParam("description") String desc,
+                              Principal principal) {
 
-        topicRepo.save(new Topic(title, desc));
+        User user = userRepo.findByUsername(principal.getName());
+        topicRepo.save(new Topic(title, desc, user));
         return "redirect:/";
     }
 

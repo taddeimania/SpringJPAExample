@@ -13,16 +13,15 @@ public class Topic {
 
     private List<Vote> votes;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
     public Topic() {
     }
 
-    public Topic(String title, String description) {
+    public Topic(String title, String description, User user) {
         this.title = title;
         this.description = description;
+        this.user = user;
     }
 
     @Id
@@ -73,6 +72,8 @@ public class Topic {
         return total;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
